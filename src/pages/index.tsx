@@ -28,7 +28,12 @@ export default function Home() {
                 <MultipleFileUploadField name="files" />
 
                 <Grid item>
-                  <Button disabled={!isValid || isSubmitting} type="submit">
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    disabled={!isValid || isSubmitting}
+                    type="submit"
+                  >
                     Submit
                   </Button>
                 </Grid>
