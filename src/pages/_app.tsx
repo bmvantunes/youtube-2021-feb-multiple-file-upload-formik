@@ -5,8 +5,8 @@ import {
   createStyles,
   CssBaseline,
   IconButton,
+  Link,
   makeStyles,
-
   ThemeProvider,
   Toolbar,
   Typography
@@ -73,6 +73,18 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <CssBaseline />
         <Container>
           <Box marginTop={10}>
+            Source code (GitHub):{' '}
+            <Link href="https://github.com/bmvantunes/youtube-2021-feb-multiple-file-upload-formik">
+              https://github.com/bmvantunes/youtube-2021-feb-multiple-file-upload-formik
+            </Link>
+          </Box>
+          <Box>
+            YouTube video:{' '}
+            <Link href="https://youtu.be/MAw0lQKqjRA">
+              https://youtu.be/MAw0lQKqjRA
+            </Link>
+          </Box>
+          <Box marginTop={3}>
             <Component {...pageProps} />
           </Box>
         </Container>

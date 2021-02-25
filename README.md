@@ -4,6 +4,10 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 Application URL: https://youtube-2021-feb-multiple-file-upload-formik-bmvantunes.vercel.app/
 
+## YouTube video
+
+YouTube video URL: https://youtu.be/MAw0lQKqjRA
+
 ## Getting Started
 
 First, run the development server:
