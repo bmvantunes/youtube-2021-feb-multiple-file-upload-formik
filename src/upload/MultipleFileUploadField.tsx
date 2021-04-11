@@ -5,7 +5,18 @@ import { FileError, FileRejection, useDropzone } from 'react-dropzone';
 import { SingleFileUploadWithProgress } from './SingleFileUploadWithProgress';
 import { UploadError } from './UploadError';
 
+let currentId = 0;
+
+function getNewId() {
+  // we could use a fancier solution instead of a sequential ID :)
+  return ++currentId;
+}
+
 export interface UploadableFile {
+  // id was added after the video being released to fix a bug
+  // Video with the bug -> https://youtube-2021-feb-multiple-file-upload-formik-bmvantunes.vercel.app/bug-report-SMC-Alpha-thank-you.mov
+  // Thank you for the bug report SMC Alpha - https://www.youtube.com/channel/UC9C4AlREWdLoKbiLNiZ7XEA
+  id: number;
   file: File;
   errors: FileError[];
   url?: string;
@@ -30,8 +41,9 @@ export function MultipleFileUploadField({ name }: { name: string }) {
 
   const [files, setFiles] = useState<UploadableFile[]>([]);
   const onDrop = useCallback((accFiles: File[], rejFiles: FileRejection[]) => {
-    const mappedAcc = accFiles.map((file) => ({ file, errors: [] }));
-    setFiles((curr) => [...curr, ...mappedAcc, ...rejFiles]);
+    const mappedAcc = accFiles.map((file) => ({ file, errors: [], id: getNewId() }));
+    const mappedRej = rejFiles.map((r) => ({ ...r, id: getNewId() }));
+    setFiles((curr) => [...curr, ...mappedAcc, ...mappedRej]);
   }, []);
 
   useEffect(() => {
@@ -70,8 +82,8 @@ export function MultipleFileUploadField({ name }: { name: string }) {
         </div>
       </Grid>
 
-      {files.map((fileWrapper, idx) => (
-        <Grid item key={idx}>
+      {files.map((fileWrapper) => (
+        <Grid item key={fileWrapper.id}>
           {fileWrapper.errors.length ? (
             <UploadError
               file={fileWrapper.file}
